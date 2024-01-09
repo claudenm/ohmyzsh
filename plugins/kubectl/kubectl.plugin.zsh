@@ -38,8 +38,8 @@ alias kdel='kubectl delete'
 alias kdelf='kubectl delete -f'
 
 # Pod management.
-alias kgp='kubectl get pods'
-alias kgpa='kubectl get pods --all-namespaces'
+alias kgp='kubectl get pods --sort-by=.metadata.creationTimestamp'
+alias kgpa='kubectl get pods --all-namespaces --sort-by=.metadata.creationTimestamp'
 alias kgpw='kgp --watch'
 alias kgpwide='kgp -o wide'
 alias kep='kubectl edit pods'
@@ -63,7 +63,7 @@ alias kds='kubectl describe svc'
 alias kdels='kubectl delete svc'
 
 # Ingress management
-alias kgi='kubectl get ingress'
+alias kgi='kubectl get ingress --sort-by=.metadata.creationTimestamp'
 alias kgia='kubectl get ingress --all-namespaces'
 alias kei='kubectl edit ingress'
 alias kdi='kubectl describe ingress'
@@ -75,6 +75,8 @@ alias kens='kubectl edit namespace'
 alias kdns='kubectl describe namespace'
 alias kdelns='kubectl delete namespace'
 alias kcn='kubectl config set-context --current --namespace'
+
+alias kns='kubens'
 
 # ConfigMap management
 alias kgcm='kubectl get configmaps'
@@ -143,6 +145,7 @@ alias klf1s='kubectl logs --since 1s -f'
 alias kcp='kubectl cp'
 
 # Node Management
+alias kgn='kubectl get nodes -L beta.kubernetes.io/instance-type'
 alias kgno='kubectl get nodes'
 alias keno='kubectl edit node'
 alias kdno='kubectl describe node'
@@ -179,6 +182,7 @@ alias kgj='kubectl get job'
 alias kej='kubectl edit job'
 alias kdj='kubectl describe job'
 alias kdelj='kubectl delete job'
+
 
 # Only run if the user actually has kubectl installed
 if (( ${+_comps[kubectl]} )); then
